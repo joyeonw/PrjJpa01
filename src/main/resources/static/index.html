@@ -17,11 +17,53 @@
   <div><a href="/articles/1">1번 글 조회</a></div>
   <div><a href="/articles/List">글 목록 조회</a></div>
   <div>&nbsp;</div>
+  <div><a href="/RestExam">Rest Api Get</a></div>
+  <div>
+  	<form action="/RestExam" method="get">
+  		<input type="submit" value="get" />
+  	</form>
+  </div>
+  <div>
+  	<form action="/RestExam" method="post">
+  		<input type="submit" value="post" />
+  	</form>
+  </div>  
+  <div>
+  	<form action="/RestExam" method="delete">
+  		<input type="submit" value="delete"/>
+  	</form>
+  </div>
+  <div>&nbsp;</div>
   <div><a href="/h2-console">db 확인</a></div>
+  
+  <script>
+  	// form 에 있는 <input type="submit" /> 
+  	//              <input type="img" /> 
+  	//              <button></button>
+  	// 모두 form 의 submit 이벤트를 발생시킨다
+  	// submit 이벤트 form action 의 페이지로 이동
+  	// form name 속성을 가진 input 들의 value 를 가지고 간다
+  	const formEls = document.querySelectorAll('form'); //3
+  	formEls.forEach( (form) => {
+		form.onsubmit = function (e) {
+						// this : 현재 이벤트(submit) 발생된 객체
+						//      : 현재 submit 된 form tag
+						e.preventDefault(); // 이벤트 취소시킨다
+						fetch( this.action, {
+								method: this.method
+						})
+							.then((resp) => resp.text())
+							.then((text) => {
+							 alert(text) 
+					})
+					 alert( this.action );
+				}
+  	})
+  </script>
   
 </body>
 </html>
-`
+
 
 
 
