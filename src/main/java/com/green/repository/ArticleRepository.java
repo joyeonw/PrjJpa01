@@ -8,9 +8,12 @@ import org.springframework.data.repository.CrudRepository;
 import com.green.dto.ArticleForm;
 import com.green.entity.Article;
 
+// extends CrudRepository<Article, Long>
+// JPA의 Crud 기능을 동작시키는 클래스 
 public interface ArticleRepository 
     extends CrudRepository<Article, Long> {
-
+	
+	// alt + shift + s : overide/implement method 사용가능한 함수목록 
 	@Override
 	ArrayList<Article> findAll();
 
