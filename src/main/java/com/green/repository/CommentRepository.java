@@ -11,6 +11,8 @@ public interface CommentRepository
 	extends JpaRepository<Comments, Long>{
 	
 	// @Query 에노테이션으로 findByArticleId() 를 실행한다
+	// @Query 에노테이션은 Jpa 기능을 사용하지 않고 @Query 안의 sql을 사용한다
+	// findByArticleId() 함수는 Comments 테이블 칼럼을 사용해서 만든다
 	// Native Query Method - Oracle 문법으로 작성된 쿼리를 입력하여 조회
 	// nativeQuery = true : 오라클 전용함수
 	// nativeQuery = false : JPA 함수

@@ -22,11 +22,15 @@
   </tbody>
 </table>
 
-<a href="/articles/List">목록</ㅁ>   
-<a href="/articles/WriteForm">새 글쓰기</ㅁ>   
-<a href="/articles/{{id}}/EditForm">수정</ㅁ>   
-<a href="/articles/{{id}}/Delete">삭제</ㅁ>   
-      
+<a href="/articles/List">목록</a>   
+<a href="/articles/WriteForm">새 글쓰기</a>   
+<a href="/articles/{{id}}/EditForm">수정</a>   
+<a href="/articles/{{id}}/Delete">삭제</a>   
+     
+    <! -- 댓글 뷰 화면 추가-->
+ 
+ 		{{>comments/_comments}}
+     
 {{>layouts/footer}}
 
 

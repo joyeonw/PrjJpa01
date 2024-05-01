@@ -24,7 +24,7 @@ public class Article {
 	// primary key        : @id
 	// 값을 자동으로 채움 : @GeneratedValue
 	@Id
-//	@GeneratedValue
+//	@GeneratedValue  번호자동 증가
 	@GeneratedValue(strategy  = GenerationType.SEQUENCE,
 	                generator = "ARTICLE_SEQ_GENERATOR")
 	private  Long    id;      // long :null 입력안됨 -> Long
@@ -45,7 +45,8 @@ public class Article {
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", content=" + content + "]";
 	}
-
+	
+	// 수정하기 위한 용도로 추가
 	public void patch(Article article) {
 		if(article.title !=null)
 			this.title = article.title;
