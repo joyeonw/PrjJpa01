@@ -57,7 +57,7 @@ public class CommentApiController {
 		@RequestBody CommentDto dto       // 입력된 자료들 input, select
 		) {
 		CommentDto createdDto = commentService.create(articleId, dto);
-		// 결과 응답ㅎ
+		// 결과 응답
 		
 		return ResponseEntity.status(HttpStatus.OK).body( dto );
 	}

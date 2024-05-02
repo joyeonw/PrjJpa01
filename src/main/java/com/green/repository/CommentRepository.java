@@ -17,6 +17,8 @@ public interface CommentRepository
 	// nativeQuery = true : 오라클 전용함수
 	// nativeQuery = false : JPA 함수
 	// :articleId (파라미터)로 조회한다
+	// JPQL - JPA 용 sql
+	// QueryDsl - JPA에서 oracle 전용 sql 문을 실행하는 기술
 	@Query(value="SELECT * FROM comments WHERE article_id=:articleId",
 			nativeQuery=true )
 	List<Comments> findByArticleId(Long articleId);
