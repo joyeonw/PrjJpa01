@@ -31,31 +31,32 @@
 
 <!-- 새 글 쓰기 -->
 <script>
-	const commentCreateBtnEl = document.getElementById('comment-create-btn');
-	commentCreateBtnEl.addEventListener('click', () => {
-		let url = 'http://localhost:9090/Api/Articles/{articleId}/comments';
-		const comment = {
-				// 새 댓글의 nickname
-				nickname : document.querySelector('#new-comment-nickname').value,
-				// 새 글의 본문
-				body     : document.querySelector('#new-comment-body').value,
-				// 부모 게시글의 아이디
-				articleId : document.querySelector('#new-comment-articleId').value
-		}
-		const params = {
-			method : 'POST',
-			headers : {"Content-Type":"application/json"},
-			body : JSON.stringify(comment)
-		}
-		fetch(url, params)
-			.then( response => {
-					let cid = response.id;
-					
-					const msg = (response.ok) ? "댓글이 등록되었습니다"
-					                          : "댓글 등록 실패!...";
-				  alert(msg);
-				  // 현재 페이지 새로 고침
-				  window.location.reload();
-			}) 
-	});
+	const  commentCreateBtnEl = document.getElementById('comment-create-btn');
+   commentCreateBtnEl.addEventListener('click', () => {
+   		// {{id}} : controller의 pathvariable - mustache 파일에서도 공유가능하다
+      let url = 'http://localhost:9090/Api/Articles/{{id}}/comments' ;
+      
+      const comment = {
+          // 새 댓글의 nick name
+          nickname   : document.querySelector('#new-comment-nickname').value,
+          // 새글의 본문
+          body       : document.querySelector('#new-comment-body').value,
+          // 부모 게시글의 id
+          article_id  : document.querySelector('#new-comment-articleId').value
+      }
+      const params = {
+          method  : 'POST',
+          headers : {"Content-Type":"application/json" },
+          body    : JSON.stringify( comment )   
+      }
+   	  fetch(url, params)
+   	    .then( response => {   	        
+   	       // let cid = response.id; 
+   	        const msg = (response.ok) ? "댓글이 등록되었습니다" 
+   	                                  : "댓글 등록 실패!...";
+   	        alert(msg);
+   	        // 현재 페이지 새로 고침
+   	        window.location.reload();
+   	    } )
+   	});
 </script>
