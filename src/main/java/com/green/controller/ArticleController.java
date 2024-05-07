@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.green.api.CommentService;
 import com.green.dto.ArticleDto;
 import com.green.dto.CommentDto;
 import com.green.entity.Article;
 import com.green.repository.ArticleRepository;
+import com.green.service.CommentService;
 
 @Controller
 public class ArticleController {

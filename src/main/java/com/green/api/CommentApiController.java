@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.green.dto.CommentDto;
+import com.green.service.CommentService;
 
 // 댓글 조회, 댓글 추가, 수정, 삭제
 @RestController
