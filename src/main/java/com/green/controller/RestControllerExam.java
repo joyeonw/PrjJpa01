@@ -7,36 +7,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController	
+@RestController
 public class RestControllerExam {
 	// Get
-	@GetMapping("/RestExam")
-	public String getRestExam() {
+	@GetMapping("/RestExam")	
+	public  String  getRestExam() {
 		return "Get data";
 	}
-	
 	// Post
-	@PostMapping ("/RestExam")
-	public String postRestExam() {
+	@PostMapping("/RestExam")
+	public  String  postRestExam() {
 		return "Post data";
 	}
-	
+	// Delete
+	@DeleteMapping("/RestExam")
+	public  String  deleteRestExam() {
+		return "delete data";
+	}
+	// Patch
+	@PatchMapping("/RestExam")
+	public  String  patchRestExam() {
+		return "patch data";
+	}
 	// Put
 	@PutMapping("/RestExam")
-	public String putRestExam() {
+	public  String  putRestExam() {
 		return "Put data";
 	}
 	
-	// Patch
-	@PatchMapping("/RestExam")
-	public String patchRestExam() {
-		return "Patch data";
-	}
-	
-	// Delete
-	@DeleteMapping("/RestExam")
-	public String deleteRestExam() {
-		return "Delete data";
-	}
-	
 }
+
+
+
+
+

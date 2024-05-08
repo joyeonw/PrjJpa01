@@ -1,4 +1,4 @@
--- 오라클 전용 데이터
+-- oracle 전용 기초 데이터 : table 생성후 자동으로 실행(책과 다르다)
 INSERT INTO article(id, title, content) VALUES(article_seq.nextval, '가가가가', '1111');
 INSERT INTO article(id, title, content) VALUES(article_seq.nextval, '나나나나', '2222');
 INSERT INTO article(id, title, content) VALUES(article_seq.nextval, '다다다다', '3333');
@@ -22,3 +22,6 @@ INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval,
 INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval, 6, 'Park', '조깅');
 INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval, 6, 'Kim', '유튜브 시청');
 INSERT INTO comments(id,article_id, nickname, body) VALUES(comments_seq.nextval, 6, 'Choi', '독서');
+
+-- 회원정보 추가 : identity
+INSERT INTO USERSJPA(email, password) VALUES('aaa@aaa.com', '$2a$10$tRRC8tTA7fLPsNkXYNfqVeN0DPr9c3JDbseBHOlzTlSNswM0LT/e2'); 

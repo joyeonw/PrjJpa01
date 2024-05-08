@@ -1,11 +1,12 @@
 package com.green.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class UserDto { 
-    private String email; 
+@Getter
+public class UserDto {   // AddUserRequest -> UserDto
+    private String email;
     private String password;
 }

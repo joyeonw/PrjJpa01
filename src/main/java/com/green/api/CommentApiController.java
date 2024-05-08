@@ -21,79 +21,66 @@ import com.green.service.CommentService;
 public class CommentApiController {
 	
 	@Autowired
-	private CommentService commentService; 
+	private CommentService commentService;
 	
-	// 1. 댓글 조회(GET)
-	@GetMapping("/Api/Articles/{articleId}/comments")
-	public ResponseEntity<List<CommentDto>> comments(
-		@PathVariable Long articleId) {
-		
-		// 정보 조회를 서비스에게 위임
+	// 1. 댓글 목록 조회(GET)
+	@GetMapping("/api/articles/{articleId}/comments")
+	public ResponseEntity< List<CommentDto> > comments(
+		  @PathVariable	Long articleId) {
+			
+		// 정보조회를 서비스에게 위임 
 		List<CommentDto> dtos = commentService.comments(articleId);
 		
-		// ResponseEntity : status.ok + dtos(arrayList->json 으로 출력) 를 리턴
-		// -> json 으로 출력 (이유: @RestController 라서)를 리턴
-		return ResponseEntity.status(HttpStatus.OK).body(dtos);
+		// ResponseEntity : staus.ok + dtos(arraylist 
+		 // -> json 으로 출력(이유: @RestController 라서 ))를 리턴
+		return ResponseEntity.status(HttpStatus.OK).body( dtos );		
 	}
 	
-	// 2. 댓글 생성(POST)
-	// POST http://localhost:9090/Api/Articles/{articleId}/comments
-//	   입력 data : {
-//	   "articleId" : 4
-//	   ,"nickname" : "Min"
-//	   ,"body" :  "아이언맨5"
-//	 }
-	// 결과  
-	//{
-	//	"id": null,
-	//	"articleId": 4,
-	//	"nickname": "Min",
-	//	"body": "아이언맨5"
-	//	}
-	// 에러 입력 : 
-	// 결과 
-	@PostMapping("/Api/Articles/{articleId}/comments")
+	// 2. 댓글 추가(POST)
+	// Post http://localhost:9090/api/articles/4/comments 
+	// 입력 data : {"article_id":4, "nickname":"Hoon", "body":"이프 온리"}
+	// 결과 {"id": null, "article_id": 4, "nickname": "Hoon","body": "이프 온리"	}
+	// 에러 입력 : {id: 4, "article_id": 4, "nickname": "Hoon","body": "이프 온리"	}
+	// 결과  400(Bad Request) 에러 -  {"id": 4,  입력데이터 키 json type "" 안에 저장 
+	// 에러 입력 : {"id": 4, "article_id": 4, "nickname": "Hoon","body": "이프 온리"	}
+	// 결과  500  message : "댓글 생성실패! 댓글의 id가 없어야합니다",
+	@PostMapping("/api/articles/{articleId}/comments")	
 	public ResponseEntity<CommentDto> create(
-		@PathVariable Long articleId,     // {articleId} : 게시글 번호
-		@RequestBody CommentDto dto       // 입력된 자료들 input, select
-		) {
-		CommentDto createdDto = commentService.create(articleId, dto);
+		  @PathVariable	Long         articleId,   // {articleId}  : 게시글번호
+		  @RequestBody  CommentDto   dto	    
+		    // 입력된 자료들 input, select : js fetch body : {}
+		  ) {
+		CommentDto createdDto  =  commentService.create(articleId, dto);
 		// 결과 응답
-		
 		return ResponseEntity.status(HttpStatus.OK).body( dto );
 	}
-/*
-	
-	 // 3. 댓글 수정(Patch)
-	 Patch http://localhost:9090/Api/comments/7
-	 수정 전 데이터 {   "article_id":6, 
- 						"id":7,
-			 		 	"body":"조깅",
-			 		 	"nickname":"Park"	}
-    수정 후 데이터 {    "article_id":6, 
-						"id":7,
-				 	 	"body":"수영",
-				 	 	"nickname":"Park2"	}
- */
-	@PatchMapping("/Api/comments/{id}")
-	public ResponseEntity<CommentDto> update(
-			@PathVariable Long id,
-			@RequestBody CommentDto dto // 수정할 데이터를 가지고 있다
-			) {
-		CommentDto updatedDto = commentService.update(id, dto);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
+	// 3. 댓글 수정(Patch)
+	// Patch  http://localhost:9090/api/comments/7
+	// 수정전 데이터 {"article_id":6, "id":7,"body":"조깅", "nickname":"Park"}
+	// 입력데이터 { "article_id":6, "id":7,"body":"수영", "nickname":"Park2"}    }
+	@PatchMapping("/api/comments/{id}")
+	public ResponseEntity<CommentDto> update(
+			@PathVariable  Long        id,
+			@RequestBody   CommentDto  dto   // 수정할 데이터를 가지고있다
+			) {
+		
+		CommentDto  udpateDto = commentService.update(id, dto);		
+		return ResponseEntity.status(HttpStatus.OK).body( udpateDto );	
+		
 	}
-	
 	
 	// 4. 댓글 삭제(Delete)
-	// Delete  http://localhost:9090/Api/comments/7
-	@DeleteMapping("/Api/comments/{id}")
-	public ResponseEntity<CommentDto> delete(
-			@PathVariable Long id
-			) {
-		CommentDto deletedDto = commentService.delete(id);
-		return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+	// Delete  http://localhost:9090/api/comments/7
+	@DeleteMapping("/api/comments/{id}")
+	public   ResponseEntity<CommentDto>  delete(@PathVariable  Long  id ) {
+		CommentDto deletedDto = commentService.delete( id );
+		return  ResponseEntity.status(HttpStatus.OK).body(deletedDto); 
 	}
-	
 }
+
+
+
+
+
+

@@ -16,14 +16,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // save() : db insert
     public Long save(UserDto dto) {
-        return userRepository.save(User.builder()  //  빌더패턴
+        return userRepository.save(User.builder()
                 .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .build()).getId();
     }
 }
-
-
-

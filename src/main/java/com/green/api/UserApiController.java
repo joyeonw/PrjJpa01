@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.dto.UserDto;
+import com.green.entity.User;
+import com.green.service.UserDetailService;
 import com.green.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,26 +19,25 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserApiController {
 
-	// 실행 -> filterChain : .authorizeHttpRequests() ->
-	//         .requestMatchers("/login", "/signup", "/user").permitAll()
-	//         로그인체크 -> 로그인 안되어있으면 /login
-	//         -> 회원가입(/signup) -> /user(db저장) -> /login ->
-	//         아이디/암호 -> 체크 -> 로그인성공하면 .loginSuccesUrl("/") 로 이동
-	//         아이디/암호 -> 체크 -> 로그인실패     -> /login 로 이동
-	
-    private final UserService userService;
+    private final UserService       userService;
+    private final UserDetailService userDetailService;
 
-    // 회원가입 로직 <- form tag 값을 저장
+    // 회원가입
     @PostMapping("/user")
-    public String signup(UserDto request) {
-        userService.save(request);
+    public String signup(UserDto userDto) {
+        userService.save(userDto);
         return "redirect:/login";
     }
 
+	// 로그아웃
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        new SecurityContextLogoutHandler().logout(
+        		request, 
+        		response, 
+        		SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/login";
     }
 
 }
+

@@ -19,7 +19,7 @@ import com.green.entity.Comments;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)    // <-- 추가
 class CommentRepositoryTest {
     @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Test
     @DisplayName("특정 게시글의 모든 댓글 조회")  // 테스트 이름
@@ -35,9 +35,11 @@ class CommentRepositoryTest {
             Comments a = new Comments(1L, article, "Park", "굿 윌 헌팅");
             Comments b = new Comments(2L, article, "Kim", "아이 엠 샘");
             Comments c = new Comments(3L, article, "Choi", "쇼생크 탈출");
-            List<Comments> expected = Arrays.asList(a, b, c); // 배열을 ArrayList 로 변경
+            List<Comments> expected = Arrays.asList(a, b, c);
+              // Arrays.asList() 배열을 ArrayList 롤 변경, 단점 : add(), remove() 안됨
             // 4. 비교 및 검증
-            assertEquals(expected.toString(), comments.toString(), "4번 글의 모든 댓글을 출력!");
+            assertEquals(expected.toString(), comments.toString(),
+            		"4번 글의 모든 댓글을 출력!");
         }
 
         /* Case 2: 1번 게시글의 모든 댓글 조회 */
